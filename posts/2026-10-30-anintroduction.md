@@ -36,7 +36,7 @@ I wish I knew what to pursue...
 
 But in all honesty; I actually know what to do. Like the great conqueror of the Aztecs said:
 
->"Cortar los puentes" - Hernán Cortés
+> "Cortar los puentes" - Hernán Cortés
 Or in english: **"Burn the ships".**
 
 

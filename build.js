@@ -63,29 +63,33 @@ ${body}
 </html>
 `;
 
+function readPost(file) {
+  const md = fs.readFileSync(`posts/${file}`, 'utf8').replace(/\r/g, '');
+  return {
+    title: md.match(/^# (.*)/m)?.[1] ?? file,
+    body: md.replace(/^# .*\n?/m, ''),
+  };
+}
+
 // A post is posts/YYYY-MM-DD-url-name.md, and its first line is "# Title".
 const posts = fs.readdirSync('posts')
   .filter(f => /^\d{4}-\d{2}-\d{2}-.+\.md$/.test(f))
   .sort()
   .reverse()
-  .map(file => {
-    const md = fs.readFileSync(`posts/${file}`, 'utf8').replace(/\r/g, '');
-    return {
-      date: file.slice(0, 10),
-      slug: file.slice(11, -3),
-      title: md.match(/^# (.*)/m)?.[1] ?? file,
-      body: md.replace(/^# .*\n?/m, ''),
-    };
-  });
+  .map(file => ({ ...readPost(file), date: file.slice(0, 10), slug: file.slice(11, -3) }));
+
+// posts/welcome.md, if it exists, is always the home page. It has no date.
+const welcome = fs.existsSync('posts/welcome.md') ? readPost('welcome.md') : null;
 
 for (const f of fs.readdirSync('docs')) if (f.endsWith('.html')) fs.unlinkSync(`docs/${f}`);
 
 // A post in full, with links to all the other posts at the bottom.
 function postPage(p) {
   const others = posts.filter(o => o !== p);
+  const meta = [p.date && NAME, p.date && prettyDate(p.date), others.length && '<a href="#more">More</a>'];
   return `<article>
 <h1>${inline(p.title)}</h1>
-<p class="meta">${NAME}<br>${prettyDate(p.date)}${others.length ? '<br><a href="#more">More</a>' : ''}</p>
+<p class="meta">${meta.filter(Boolean).join('<br>')}</p>
 ${markdown(p.body)}
 </article>
 ${others.length ? `<ul class="posts" id="more">
@@ -95,7 +99,8 @@ ${others.map(o => `<li><a href="${o.slug}.html">${inline(o.title)}</a><br><span 
 
 for (const p of posts) fs.writeFileSync(`docs/${p.slug}.html`, page(`${esc(p.title)} | ${NAME}`, postPage(p)));
 
-// The home page is the newest post.
-fs.writeFileSync('docs/index.html', page(NAME, posts.length ? postPage(posts[0]) : ''));
+// Without a welcome post, the home page is the newest post.
+const home = welcome ?? posts[0];
+fs.writeFileSync('docs/index.html', page(NAME, home ? postPage(home) : ''));
 
 console.log(`Built ${posts.length} post(s).`);

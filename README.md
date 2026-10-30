@@ -6,4 +6,6 @@ For å lage en post:
 2. Første linje: `# The title`, så skrives inlegget under.
 3. Run `node build.js`.
 
+Forsiden: `posts/welcome.md` vises alltid først, uten dato. Alle andre poster ligger som lenker under den.
+
 Siden sitter her: `docs/`. Navnet mitt på toppen av `build.js`, design: `docs/style.css`.

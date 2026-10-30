@@ -1,9 +1,9 @@
 # My webpage
 
-To write a post:
+For å lage en post:
 
-1. Add a file to `posts/` named like `2026-10-30-my-post.md`. The date is the post's date and the rest is its URL.
-2. Make the first line `# The title`, then write the post below it.
+1. Legg filen til i `posts/` kall den(på amerikansk format) `2026-10-30-my-post.md`. Dato, og resten er URL.
+2. Første linje: `# The title`, så skrives inlegget under.
 3. Run `node build.js`.
 
-The finished site is in `docs/`. Your name is at the top of `build.js`, and the design is in `docs/style.css`.
+Siden sitter her: `docs/`. Navnet mitt på toppen av `build.js`, design: `docs/style.css`.

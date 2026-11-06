@@ -66,17 +66,23 @@ ${body}
 function readPost(file) {
   const md = fs.readFileSync(`posts/${file}`, 'utf8').replace(/\r/g, '');
   return {
-    title: md.match(/^# (.*)/m)?.[1] ?? file,
-    body: md.replace(/^# .*\n?/m, ''),
+    title: md.match(/^#+ (.*)/m)?.[1] ?? file,
+    body: md.replace(/^#+ .*\n?/m, ''),
   };
 }
 
-// A post is posts/YYYY-MM-DD-url-name.md, and its first line is "# Title".
-const posts = fs.readdirSync('posts')
-  .filter(f => /^\d{4}-\d{2}-\d{2}-.+\.md$/.test(f))
-  .sort()
-  .reverse()
-  .map(file => ({ ...readPost(file), date: file.slice(0, 10), slug: file.slice(11, -3) }));
+// A post is posts/YYYY-MM-DD-url-name.md (2026-11-6 works too), and its first line is "# Title".
+const posts = [];
+for (const file of fs.readdirSync('posts')) {
+  const m = file.match(/^(\d{4})-(\d{1,2})-(\d{1,2})-(.+)\.md$/);
+  if (m) {
+    const date = `${m[1]}-${m[2].padStart(2, '0')}-${m[3].padStart(2, '0')}`;
+    posts.push({ ...readPost(file), date, slug: m[4] });
+  } else if (file !== 'welcome.md' && !file.startsWith('.')) {
+    console.log(`Skipped posts/${file}: name it like 2026-11-06-my-post.md`);
+  }
+}
+posts.sort((a, b) => (b.date + b.slug).localeCompare(a.date + a.slug));
 
 // posts/welcome.md, if it exists, is always the home page. It has no date.
 const welcome = fs.existsSync('posts/welcome.md') ? readPost('welcome.md') : null;

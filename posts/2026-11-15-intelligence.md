@@ -2,12 +2,13 @@
 
 Every day when I wake up I find myself thinking about tomorrow.
 
-I can spend countless hours ruminating trying to analyze what the future might hold, on a daily basis.
-Especially on how to make directional decisions today, to best position myself for the future.
+I can spend countless hours ruminating trying to analyze what the future might hold on a daily basis.
+Especially on how to make directional decisions and to best position myself for the future.
 
-Something I have been caught up on in the last year or so, is;
+*Something thats been on my mind the last year or so, is;*
 
-**If intelligence becomes a commodity, is growing my own corn really worth it?**
+**If intelligence becomes a commodity, is growing your own corn really worth it?**
+
 I believe this to be a likely future, so I'm replacing the word *if* with when for the rest of this text.
 
 So, when we get to a world where intelligence is abundant, using tokens to do knowledge work becomes as common as buying gas for your car,

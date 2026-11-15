@@ -9,7 +9,7 @@ Especially on how to make directional decisions and to best position myself for 
 
 **If intelligence becomes a commodity, is growing your own corn really worth it?**
 
-I believe this to be a likely future, so I'm replacing the word *if* with when for the rest of this text.
+I believe this to be a likely future, so I'm replacing the word *if* with *when* for the rest of this text.
 
 So, when we get to a world where intelligence is abundant, using tokens to do knowledge work becomes as common as buying gas for your car,
 

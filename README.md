@@ -8,4 +8,6 @@ For å lage en post:
 
 Forsiden: `posts/welcome.md` vises alltid først, uten dato. Alle andre poster ligger som lenker under den.
 
+Uferdige poster: legg dem i `drafts/`. De kommer ikke på siden og blir ikke lastet opp til GitHub. Flytt dem til `posts/` når de er ferdige.
+
 Siden sitter her: `docs/`. Navnet mitt på toppen av `build.js`, design: `docs/style.css`.
